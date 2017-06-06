@@ -1,7 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Developed by: 
+    Eric Mazza
+
+Date started: 
+    06/06/2017
+
+Description:
+    This is an application that I'm creating for my programming culminating, 
+    it will allow teachers to log their students, and their information in an easy 
+    to manage environment.
+
  */
 
 /**
