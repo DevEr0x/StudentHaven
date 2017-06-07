@@ -1,20 +1,24 @@
 /*
-Developed by: 
-    Eric Mazza
+ Developed by: 
+ Eric Mazza
 
-Date started: 
-    06/06/2017
+ Date started: 
+ 06/06/2017
 
-Description:
-    This is an application that I'm creating for my programming culminating, 
-    it will allow teachers to log their students, and their information in an easy 
-    to manage environment.
+ Description:
+ This is an application that I'm creating for my programming culminating, 
+ it will allow teachers to log their students, and their information in an easy 
+ to manage environment.
 
  */
+
+import java.io.*;
 
 /**
  *
  * @author ermaz0018
+ *
+ *
  */
 public class CulminatingProject extends javax.swing.JFrame {
 
@@ -73,6 +77,11 @@ public class CulminatingProject extends javax.swing.JFrame {
         passwordPrompt.setText("Password:");
 
         loginConfirm.setText("Confirm");
+        loginConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginConfirmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -125,6 +134,11 @@ public class CulminatingProject extends javax.swing.JFrame {
         newPasswordPrompt.setText("Password:");
 
         newAccountConfirm.setText("Confirm");
+        newAccountConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAccountConfirmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout newAccountPanelLayout = new javax.swing.GroupLayout(newAccountPanel);
         newAccountPanel.setLayout(newAccountPanelLayout);
@@ -194,6 +208,87 @@ public class CulminatingProject extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginConfirmActionPerformed
+        String username;
+        String password;
+
+        username = usernameInput.getText();
+        password = passwordInput.getText();
+        System.out.println("Logging in using these credentials...");
+        System.out.println("Username: " + username + "\nPassword: " + password);
+        LogIn(username, password);
+    }//GEN-LAST:event_loginConfirmActionPerformed
+
+    private void newAccountConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountConfirmActionPerformed
+        String username;
+        String password;
+
+        username = newUsernameInput.getText();
+        password = newPasswordInput.getText();
+        System.out.println("Creating a new account... using these credentials: ");
+        System.out.println("Username: " + username + "\nPassword: " + password);
+        try {
+            NewAccount(username, password);
+        } catch (IOException e) {
+            System.out.println("Didn't allow us to write to the file...");
+            System.err.println("Error: " + e);
+        }
+    }//GEN-LAST:event_newAccountConfirmActionPerformed
+
+    public static void LogIn(String givenUsername, String givenPassword) {
+        String path = "Y://Documents/StudentHavenAccounts/" + givenUsername + ".txt";
+        File textFile = new File(path);
+        FileReader in;
+        BufferedReader readFile;
+        String realPassword = null;
+        givenPassword = "password:" + givenPassword;
+
+        try {
+            in = new FileReader(textFile);
+            readFile = new BufferedReader(in);
+            while ((realPassword = readFile.readLine()) != null) {
+                System.out.println(realPassword);
+            }
+            readFile.close();
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No account by that name.");
+            System.err.println("FileNotFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Problem reading file.");
+            System.err.println("IOException: " + e.getMessage());
+        }
+        if (givenPassword.equals(realPassword)) {
+            System.out.println("Logged in!");
+        } else {
+            System.out.println("The password is incorrect.");
+        }
+    }
+
+    public static void NewAccount(String username, String password) throws IOException {
+        File textFile;
+        String path = "Y://Documents/StudentHavenAccounts/" + username + ".txt";
+        FileWriter write;
+        PrintWriter print_line;
+        textFile = new File(path);
+
+        if (textFile.exists()) {
+            System.out.println("File already exists.");
+        } else {
+            try {
+                textFile.createNewFile();
+                System.out.println("New file created.");
+            } catch (IOException e) {
+                System.out.println("The file could not be created.");
+                System.err.println("IOException: " + e.getMessage());
+            }
+        }
+        write = new FileWriter(path);
+        print_line = new PrintWriter(write);
+        print_line.printf("%s" + "%n", "password:" + password);
+        print_line.close();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -208,16 +303,21 @@ public class CulminatingProject extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CulminatingProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CulminatingProject.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CulminatingProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CulminatingProject.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CulminatingProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CulminatingProject.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CulminatingProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CulminatingProject.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
