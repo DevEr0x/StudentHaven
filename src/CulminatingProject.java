@@ -40,14 +40,16 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         mainTitle = new javax.swing.JLabel();
         titleSeperator = new javax.swing.JSeparator();
+        mainPanelTabbed = new javax.swing.JTabbedPane();
+        accountPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         loginTitle = new javax.swing.JLabel();
         usernamePrompt = new javax.swing.JLabel();
         usernameInput = new javax.swing.JTextField();
         passwordPrompt = new javax.swing.JLabel();
         loginConfirm = new javax.swing.JButton();
-        passwordInput = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        passwordInput = new javax.swing.JPasswordField();
         newAccountPanel = new javax.swing.JPanel();
         newAccountTitle = new javax.swing.JLabel();
         newUsernamePrompt = new javax.swing.JLabel();
@@ -56,6 +58,18 @@ public class CulminatingProject extends javax.swing.JFrame {
         newPasswordInput = new javax.swing.JPasswordField();
         newAccountConfirm = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        accountOutput = new javax.swing.JLabel();
+        classroomCreatePanel = new javax.swing.JPanel();
+        classroomTable = new javax.swing.JScrollPane();
+        classroomTableDisplay = new javax.swing.JTable();
+        newStudentLabel = new javax.swing.JLabel();
+        newScoreLabel = new javax.swing.JLabel();
+        studentNameInput = new javax.swing.JTextField();
+        studentScoreInput = new javax.swing.JTextField();
+        studentInfoSubmitButton = new javax.swing.JButton();
+        activeAccount = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +79,9 @@ public class CulminatingProject extends javax.swing.JFrame {
         mainTitle.setText("Student Haven");
 
         titleSeperator.setForeground(new java.awt.Color(0, 0, 0));
+
+        mainPanelTabbed.setToolTipText("");
+        mainPanelTabbed.setName(""); // NOI18N
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
         loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -126,7 +143,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordPrompt)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(loginConfirm)
                 .addGap(30, 30, 30))
         );
@@ -189,51 +206,156 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addGroup(newAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newPasswordPrompt)
                     .addComponent(newPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(newAccountConfirm)
                 .addGap(29, 29, 29))
         );
+
+        accountOutput.setForeground(new java.awt.Color(255, 51, 51));
+        accountOutput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        accountOutput.setText("Awaiting Login Information");
+
+        javax.swing.GroupLayout accountPanelLayout = new javax.swing.GroupLayout(accountPanel);
+        accountPanel.setLayout(accountPanelLayout);
+        accountPanelLayout.setHorizontalGroup(
+            accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(accountOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(accountPanelLayout.createSequentialGroup()
+                        .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addComponent(newAccountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        accountPanelLayout.setVerticalGroup(
+            accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, accountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(accountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newAccountPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(accountOutput)
+                .addContainerGap())
+        );
+
+        mainPanelTabbed.addTab("Account Details", accountPanel);
+
+        classroomTableDisplay.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Student Name", "Score"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        classroomTableDisplay.getTableHeader().setResizingAllowed(false);
+        classroomTableDisplay.getTableHeader().setReorderingAllowed(false);
+        classroomTable.setViewportView(classroomTableDisplay);
+        if (classroomTableDisplay.getColumnModel().getColumnCount() > 0) {
+            classroomTableDisplay.getColumnModel().getColumn(0).setResizable(false);
+            classroomTableDisplay.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        newStudentLabel.setText("Add Student Name:");
+
+        newScoreLabel.setText("Add Student Score:");
+
+        studentInfoSubmitButton.setText("Submit");
+
+        javax.swing.GroupLayout classroomCreatePanelLayout = new javax.swing.GroupLayout(classroomCreatePanel);
+        classroomCreatePanel.setLayout(classroomCreatePanelLayout);
+        classroomCreatePanelLayout.setHorizontalGroup(
+            classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(newStudentLabel)
+                    .addComponent(newScoreLabel)
+                    .addComponent(studentNameInput)
+                    .addComponent(studentScoreInput, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                        .addComponent(studentInfoSubmitButton)
+                        .addGap(14, 14, 14)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        classroomCreatePanelLayout.setVerticalGroup(
+            classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(newStudentLabel)
+                .addGap(18, 18, 18)
+                .addComponent(studentNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(newScoreLabel)
+                .addGap(18, 18, 18)
+                .addComponent(studentScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(studentInfoSubmitButton)
+                .addGap(56, 56, 56))
+        );
+
+        mainPanelTabbed.addTab("Classroom Creation", classroomCreatePanel);
+
+        activeAccount.setForeground(new java.awt.Color(0, 0, 255));
+        activeAccount.setText("Not logged in.");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(titleSeperator, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(newAccountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+            .addComponent(mainTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titleSeperator)
+            .addComponent(mainPanelTabbed)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(activeAccount)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(activeAccount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mainTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(titleSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(newAccountPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(titleSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mainPanelTabbed))
         );
+
+        mainPanelTabbed.getAccessibleContext().setAccessibleName("Account Setup");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void loginConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginConfirmActionPerformed
-        String username;
-        String password;
-
-        username = usernameInput.getText();
-        password = passwordInput.getText();
-        System.out.println("Logging in using these credentials...");
-        System.out.println("Username: " + username + "\nPassword: " + password);
-        LogIn(username, password);
-    }//GEN-LAST:event_loginConfirmActionPerformed
 
     private void newAccountConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountConfirmActionPerformed
         String username;
@@ -244,14 +366,31 @@ public class CulminatingProject extends javax.swing.JFrame {
         System.out.println("Creating a new account... using these credentials: ");
         System.out.println("Username: " + username + "\nPassword: " + password);
         try {
-            NewAccount(username, password);
+            accountOutput.setText(NewAccount(username, password));
         } catch (IOException e) {
             System.out.println("Didn't allow us to write to the file...");
             System.err.println("Error: " + e);
+            accountOutput.setText("An error occured. Error: " + e);
         }
     }//GEN-LAST:event_newAccountConfirmActionPerformed
 
-    public static void LogIn(String givenUsername, String givenPassword) {
+    private void loginConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginConfirmActionPerformed
+        String username;
+        String password;
+        boolean loggedIn = false;
+
+        username = usernameInput.getText();
+        password = passwordInput.getText();
+        System.out.println("Logging in using these credentials...");
+        System.out.println("Username: " + username + "\nPassword: " + password);
+        accountOutput.setText(LogIn(username, password));
+        if (LogIn(username, password) == "Logged in!") {
+            activeAccount.setText("Welcome, " + username + "!");
+            loggedIn = true;
+        }
+    }//GEN-LAST:event_loginConfirmActionPerformed
+
+    public static String LogIn(String givenUsername, String givenPassword) {
         String path = "Y://Documents/StudentHavenAccounts/" + givenUsername + ".txt";
         File textFile = new File(path);
         FileReader in;
@@ -264,7 +403,6 @@ public class CulminatingProject extends javax.swing.JFrame {
             in = new FileReader(textFile);
             readFile = new BufferedReader(in);
             while ((realPassword = readFile.readLine()) != null) {
-//                System.out.println(realPassword);
                 endPass = realPassword;
             }
             readFile.close();
@@ -272,18 +410,22 @@ public class CulminatingProject extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("No account by that name.");
             System.err.println("FileNotFoundException: " + e.getMessage());
+            return ("No account by that name was found.");
         } catch (IOException e) {
             System.out.println("Problem reading file.");
             System.err.println("IOException: " + e.getMessage());
+            return ("An error occured- IOException:" + e.getMessage());
         }
         if (givenPassword.equals(endPass)) {
             System.out.println("Logged in!");
+            return ("Logged in!");
         } else {
             System.out.println("The password is incorrect.");
+            return ("The password is incorrect");
         }
     }
 
-    public static void NewAccount(String username, String password) throws IOException {
+    public static String NewAccount(String username, String password) throws IOException {
         File textFile;
         String path = "Y://Documents/StudentHavenAccounts/" + username + ".txt";
         FileWriter write;
@@ -292,7 +434,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         if (textFile.exists()) {
             System.out.println("Account already exists.");
-            return;
+            return ("Account already exists.");
         } else {
             try {
                 textFile.createNewFile();
@@ -300,12 +442,14 @@ public class CulminatingProject extends javax.swing.JFrame {
             } catch (IOException e) {
                 System.out.println("The file could not be created.");
                 System.err.println(e.getMessage());
+                return ("An error occured, the account couldn't be created.");
             }
         }
         write = new FileWriter(path);
         print_line = new PrintWriter(write);
         print_line.printf("%s" + "%n", "password:" + password);
         print_line.close();
+        return ("Account created.");
     }
 
     /**
@@ -349,21 +493,35 @@ public class CulminatingProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accountOutput;
+    private javax.swing.JPanel accountPanel;
+    private javax.swing.JLabel activeAccount;
+    private javax.swing.JPanel classroomCreatePanel;
+    private javax.swing.JScrollPane classroomTable;
+    private javax.swing.JTable classroomTableDisplay;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton loginConfirm;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel loginTitle;
+    private javax.swing.JTabbedPane mainPanelTabbed;
     private javax.swing.JLabel mainTitle;
     private javax.swing.JButton newAccountConfirm;
     private javax.swing.JPanel newAccountPanel;
     private javax.swing.JLabel newAccountTitle;
     private javax.swing.JPasswordField newPasswordInput;
     private javax.swing.JLabel newPasswordPrompt;
+    private javax.swing.JLabel newScoreLabel;
+    private javax.swing.JLabel newStudentLabel;
     private javax.swing.JTextField newUsernameInput;
     private javax.swing.JLabel newUsernamePrompt;
-    private javax.swing.JTextField passwordInput;
+    private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordPrompt;
+    private javax.swing.JButton studentInfoSubmitButton;
+    private javax.swing.JTextField studentNameInput;
+    private javax.swing.JTextField studentScoreInput;
     private javax.swing.JSeparator titleSeperator;
     private javax.swing.JTextField usernameInput;
     private javax.swing.JLabel usernamePrompt;
