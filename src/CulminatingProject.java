@@ -13,6 +13,13 @@
  */
 
 import java.io.*;
+import java.nio.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +35,8 @@ public class CulminatingProject extends javax.swing.JFrame {
     public CulminatingProject() {
         initComponents();
     }
+    boolean loggedIn = false;
+    String username;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +79,8 @@ public class CulminatingProject extends javax.swing.JFrame {
         activeAccount = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +93,11 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         mainPanelTabbed.setToolTipText("");
         mainPanelTabbed.setName(""); // NOI18N
+        mainPanelTabbed.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainPanelTabbedMouseClicked(evt);
+            }
+        });
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
         loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -241,7 +257,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        mainPanelTabbed.addTab("Account Details", accountPanel);
+        mainPanelTabbed.addTab("Account Details", null, accountPanel, "This is where you can login or create an account.");
 
         classroomTableDisplay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -279,22 +295,30 @@ public class CulminatingProject extends javax.swing.JFrame {
         newScoreLabel.setText("Add Student Score:");
 
         studentInfoSubmitButton.setText("Submit");
+        studentInfoSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentInfoSubmitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout classroomCreatePanelLayout = new javax.swing.GroupLayout(classroomCreatePanel);
         classroomCreatePanel.setLayout(classroomCreatePanelLayout);
         classroomCreatePanelLayout.setHorizontalGroup(
             classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(newStudentLabel)
-                    .addComponent(newScoreLabel)
-                    .addComponent(studentNameInput)
-                    .addComponent(studentScoreInput, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(newStudentLabel)
+                            .addComponent(newScoreLabel)
+                            .addComponent(studentNameInput)
+                            .addComponent(studentScoreInput, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(studentInfoSubmitButton)
-                        .addGap(14, 14, 14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -313,17 +337,34 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addComponent(newScoreLabel)
                 .addGap(18, 18, 18)
                 .addComponent(studentScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(studentInfoSubmitButton)
-                .addGap(56, 56, 56))
+                .addGap(29, 29, 29))
         );
 
-        mainPanelTabbed.addTab("Classroom Creation", classroomCreatePanel);
+        mainPanelTabbed.addTab("Classroom Creation", null, classroomCreatePanel, "This is where you can add students");
 
         activeAccount.setForeground(new java.awt.Color(0, 0, 255));
         activeAccount.setText("Not logged in.");
 
         jMenu1.setText("File");
+
+        jMenuItem1.setText("Log out");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -375,9 +416,7 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_newAccountConfirmActionPerformed
 
     private void loginConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginConfirmActionPerformed
-        String username;
         String password;
-        boolean loggedIn = false;
 
         username = usernameInput.getText();
         password = passwordInput.getText();
@@ -389,6 +428,98 @@ public class CulminatingProject extends javax.swing.JFrame {
             loggedIn = true;
         }
     }//GEN-LAST:event_loginConfirmActionPerformed
+
+    private void studentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentInfoSubmitButtonActionPerformed
+        String student;
+        int score;
+        student = studentNameInput.getText();
+        score = Integer.parseInt(studentScoreInput.getText());
+
+        if (loggedIn) {
+            System.out.println("Student Name:" + student);
+            System.out.println("Student Score:" + score);
+            try {
+                newStudent(student, score, username);
+                System.out.println("All good! New Student Created!");
+            } catch (IOException ex) {
+                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("There was an error!");
+                System.err.println("Error:" + ex);
+            }
+        } else {
+            System.out.println("You're not logged in! Please log in to edit student information!");
+            activeAccount.setText("Log in to edit student information!");
+        }
+    }//GEN-LAST:event_studentInfoSubmitButtonActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (loggedIn) {
+            loggedIn = false;
+            activeAccount.setText("Logged out.");
+            accountOutput.setText("Logged out. Please log in to continue.");
+        } else {
+            activeAccount.setText("You are not currently logged in.");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mainPanelTabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelTabbedMouseClicked
+        if (loggedIn) {
+            System.out.println("Test");
+        }
+    }//GEN-LAST:event_mainPanelTabbedMouseClicked
+
+    public void addStudents() {
+        String[] studentList = {};
+        int studentCount = 0;
+//        for(int i = 0; i <= studentCount; i++){
+//        }
+//        DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+//        model.addRow(row);
+    }
+
+    public void newStudent(String student, int score, String username) throws IOException {
+        File textFile;
+        String path = "Y://Documents/StudentHavenAccounts/Students/" + student + ".txt";
+        String teacherPath = "Y://Documents/StudentHavenAccounts/" + username + ".txt";
+        String teacherTrack = String.format("%s%n", "student:" + student);
+        FileWriter write;
+        PrintWriter print_line;
+        textFile = new File(path);
+
+        if (textFile.exists()) {
+            System.out.println("Student by that name already exists.");
+        } else {
+            try {
+                textFile.createNewFile();
+                System.out.println("New student file created.");
+
+            } catch (IOException e) {
+                System.out.println("The file could not be created.");
+                System.err.println(e.getMessage());
+            }
+        }
+
+        write = new FileWriter(path);
+        print_line = new PrintWriter(write);
+        print_line.printf("%s" + "%n", "teacher:" + username);
+        print_line.printf("%s" + "%n", "score:" + score);
+        print_line.close();
+
+        try {
+            Files.write(Paths.get(teacherPath), teacherTrack.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+
+        }
+
+        Object[] row = {student, score};
+        DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+        model.addRow(row);
+
+    }
 
     public static String LogIn(String givenUsername, String givenPassword) {
         String path = "Y://Documents/StudentHavenAccounts/" + givenUsername + ".txt";
@@ -501,6 +632,8 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JTable classroomTableDisplay;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton loginConfirm;
