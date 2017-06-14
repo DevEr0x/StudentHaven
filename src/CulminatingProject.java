@@ -37,6 +37,7 @@ public class CulminatingProject extends javax.swing.JFrame {
     }
     boolean loggedIn = false;
     String username;
+    String path;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +51,19 @@ public class CulminatingProject extends javax.swing.JFrame {
         mainTitle = new javax.swing.JLabel();
         titleSeperator = new javax.swing.JSeparator();
         mainPanelTabbed = new javax.swing.JTabbedPane();
+        filePanel = new javax.swing.JPanel();
+        titlePrompt = new javax.swing.JLabel();
+        locationDesc1 = new javax.swing.JLabel();
+        locationDesc2 = new javax.swing.JLabel();
+        locationDesc3 = new javax.swing.JLabel();
+        locationPromptLabel = new javax.swing.JLabel();
+        pathInput = new javax.swing.JTextField();
+        pathConfirmButton = new javax.swing.JButton();
+        pathOutput = new javax.swing.JLabel();
+        examplePrompt = new javax.swing.JLabel();
+        example1 = new javax.swing.JLabel();
+        example2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         accountPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         loginTitle = new javax.swing.JLabel();
@@ -76,6 +90,8 @@ public class CulminatingProject extends javax.swing.JFrame {
         studentNameInput = new javax.swing.JTextField();
         studentScoreInput = new javax.swing.JTextField();
         studentInfoSubmitButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         activeAccount = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -98,6 +114,113 @@ public class CulminatingProject extends javax.swing.JFrame {
                 mainPanelTabbedMouseClicked(evt);
             }
         });
+
+        filePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        titlePrompt.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        titlePrompt.setForeground(new java.awt.Color(51, 51, 255));
+        titlePrompt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titlePrompt.setText("Where do you want the application files to be stored?");
+
+        locationDesc1.setText("In the space provided, you must type out the directory that you wish to store all the files for this program.");
+
+        locationDesc2.setText("If this step is skipped, the program will not work as intended, so please just choose a directory to store your files.");
+
+        locationDesc3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        locationDesc3.setText("Even if you're a returning user, please type out the directory you were using previously so the program knows where it's supposed to look.");
+
+        locationPromptLabel.setText("Where should the files be stored:");
+
+        pathInput.setText("D:/");
+
+        pathConfirmButton.setText("Confirm");
+        pathConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pathConfirmButtonActionPerformed(evt);
+            }
+        });
+
+        pathOutput.setForeground(new java.awt.Color(255, 0, 51));
+        pathOutput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pathOutput.setText("Awaiting File Selection");
+
+        examplePrompt.setForeground(new java.awt.Color(0, 0, 255));
+        examplePrompt.setText("Examples:");
+
+        example1.setText("D:/");
+
+        example2.setText("C:/Program Files (x86)/");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel1.setText("Make sure that you include a \"/\" at the end of the directory");
+
+        javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
+        filePanel.setLayout(filePanelLayout);
+        filePanelLayout.setHorizontalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titlePrompt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pathOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(filePanelLayout.createSequentialGroup()
+                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(filePanelLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(locationDesc2)
+                            .addComponent(locationDesc1)))
+                    .addGroup(filePanelLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pathConfirmButton)
+                            .addComponent(locationPromptLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pathInput, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(filePanelLayout.createSequentialGroup()
+                                .addComponent(examplePrompt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(example2)
+                                    .addComponent(example1)))))
+                    .addGroup(filePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(locationDesc3))
+                    .addGroup(filePanelLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        filePanelLayout.setVerticalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titlePrompt)
+                .addGap(18, 18, 18)
+                .addComponent(locationDesc1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(locationDesc2)
+                .addGap(18, 18, 18)
+                .addComponent(locationDesc3)
+                .addGap(52, 52, 52)
+                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(locationPromptLabel)
+                    .addComponent(pathInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pathConfirmButton)
+                    .addGroup(filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(examplePrompt)
+                        .addComponent(example1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(example2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(pathOutput)
+                .addContainerGap())
+        );
+
+        mainPanelTabbed.addTab("File Locations", filePanel);
 
         loginPanel.setBackground(new java.awt.Color(255, 255, 255));
         loginPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -159,7 +282,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordPrompt)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(loginConfirm)
                 .addGap(30, 30, 30))
         );
@@ -241,7 +364,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                     .addComponent(accountOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                         .addComponent(newAccountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -314,7 +437,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                             .addComponent(newScoreLabel)
                             .addComponent(studentNameInput)
                             .addComponent(studentScoreInput, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(studentInfoSubmitButton)
@@ -337,12 +460,38 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addComponent(newScoreLabel)
                 .addGap(18, 18, 18)
                 .addComponent(studentScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(studentInfoSubmitButton)
                 .addGap(29, 29, 29))
         );
 
         mainPanelTabbed.addTab("Classroom Creation", null, classroomCreatePanel, "This is where you can add students");
+
+        jButton1.setText("Test the thing!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(355, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(353, 353, 353))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(jButton1)
+                .addContainerGap(208, Short.MAX_VALUE))
+        );
+
+        mainPanelTabbed.addTab("Testing Tab", jPanel1);
 
         activeAccount.setForeground(new java.awt.Color(0, 0, 255));
         activeAccount.setText("Not logged in.");
@@ -467,28 +616,109 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void mainPanelTabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelTabbedMouseClicked
-        if (loggedIn) {
-            System.out.println("Test");
-        }
+
     }//GEN-LAST:event_mainPanelTabbedMouseClicked
 
+    private void pathConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathConfirmButtonActionPerformed
+        String filePath;
+        filePath = pathInput.getText();
+        path = filePath;
+        filePath = filePath + "\\StudentHavenAccounts\\Students";
+
+        File f = new File(filePath);
+        try {
+            if (f.mkdir()) {
+                System.out.println("Directory Created");
+                pathOutput.setText("Directory Created!");
+            } else {
+                System.out.println("Directory is not created");
+                pathOutput.setText("An error occured creating the directory.");
+            }
+            if (f.exists()) {
+                System.out.println("Location already exists!");
+                pathOutput.setText("Existing Directory Selected");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            pathOutput.setText("An error occured!");
+        }
+    }//GEN-LAST:event_pathConfirmButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        addStudents();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void addStudents() {
-        String[] studentList = {};
+        String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+        File textFile = new File(teacherPath);
+        FileReader in;
+        BufferedReader readFile;
+
+        String sep = ":";
+        String col = "student";
+        String studentName = null;
+        String studentScore = null;
         int studentCount = 0;
-//        for(int i = 0; i <= studentCount; i++){
+
+        String[] studentList = null;
+        String[] scoreList;
+
+        try {
+            in = new FileReader(textFile);
+            readFile = new BufferedReader(in);
+            while ((studentName = readFile.readLine()) != null) {
+                if (studentName.contains(col + sep)) {
+                    studentName = studentName.substring(col.length() + 1);
+                    System.out.println(studentName);
+                    studentCount++;
+                    String[] studentHolder = new String[studentCount];
+                    String[] scoreHolder = new String[studentCount];
+                    studentHolder[studentCount] = studentName;
+                    for (int i = 0; i < studentCount; i++) {
+                        System.out.println(studentHolder[i]);
+                    }
+                }
+            }
+            readFile.close();
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No account by that name.");
+            System.err.println("FileNotFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Problem reading file.");
+            System.err.println("IOException: " + e.getMessage());
+        }
+//        String studentPath = path + "StudentHavenAccounts/Students/" + studentList[0] + ".txt";
+//        textFile = new File(studentPath);
+//        col = "score";
+//
+//        try {
+//            in = new FileReader(textFile);
+//            readFile = new BufferedReader(in);
+//            while ((studentScore = readFile.readLine()) != null) {
+//                if (studentScore.contains(col + sep)) {
+//                    System.out.println("It found the score!");
+//                }
+//            }
+//            readFile.close();
+//            in.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("No account by that name.");
+//            System.err.println("FileNotFoundException: " + e.getMessage());
+//        } catch (IOException e) {
+//            System.out.println("Problem reading file.");
+//            System.err.println("IOException: " + e.getMessage());
 //        }
-//        DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-//        model.addRow(row);
     }
 
     public void newStudent(String student, int score, String username) throws IOException {
         File textFile;
-        String path = "Y://Documents/StudentHavenAccounts/Students/" + student + ".txt";
-        String teacherPath = "Y://Documents/StudentHavenAccounts/" + username + ".txt";
+        String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
+        String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
         String teacherTrack = String.format("%s%n", "student:" + student);
         FileWriter write;
         PrintWriter print_line;
-        textFile = new File(path);
+        textFile = new File(studentPath);
 
         if (textFile.exists()) {
             System.out.println("Student by that name already exists.");
@@ -503,7 +733,7 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
         }
 
-        write = new FileWriter(path);
+        write = new FileWriter(studentPath);
         print_line = new PrintWriter(write);
         print_line.printf("%s" + "%n", "teacher:" + username);
         print_line.printf("%s" + "%n", "score:" + score);
@@ -521,20 +751,23 @@ public class CulminatingProject extends javax.swing.JFrame {
 
     }
 
-    public static String LogIn(String givenUsername, String givenPassword) {
-        String path = "Y://Documents/StudentHavenAccounts/" + givenUsername + ".txt";
-        File textFile = new File(path);
+    public String LogIn(String givenUsername, String givenPassword) {
+        String currentPath = path + "StudentHavenAccounts/" + givenUsername + ".txt";
+        File textFile = new File(currentPath);
         FileReader in;
         BufferedReader readFile;
         String realPassword = null;
         String endPass = "";
-        givenPassword = "password:" + givenPassword;;
+        givenPassword = "password:" + givenPassword;
 
         try {
             in = new FileReader(textFile);
             readFile = new BufferedReader(in);
             while ((realPassword = readFile.readLine()) != null) {
-                endPass = realPassword;
+                endPass = realPassword.substring(0, givenPassword.length());
+                if (givenPassword.equals(endPass)) {
+                    return ("Logged in!");
+                }
             }
             readFile.close();
             in.close();
@@ -548,20 +781,18 @@ public class CulminatingProject extends javax.swing.JFrame {
             return ("An error occured- IOException:" + e.getMessage());
         }
         if (givenPassword.equals(endPass)) {
-            System.out.println("Logged in!");
             return ("Logged in!");
         } else {
-            System.out.println("The password is incorrect.");
             return ("The password is incorrect");
         }
     }
 
-    public static String NewAccount(String username, String password) throws IOException {
+    public String NewAccount(String username, String password) throws IOException {
         File textFile;
-        String path = "Y://Documents/StudentHavenAccounts/" + username + ".txt";
+        String currentPath = path + "StudentHavenAccounts/" + username + ".txt";
         FileWriter write;
         PrintWriter print_line;
-        textFile = new File(path);
+        textFile = new File(currentPath);
 
         if (textFile.exists()) {
             System.out.println("Account already exists.");
@@ -576,7 +807,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 return ("An error occured, the account couldn't be created.");
             }
         }
-        write = new FileWriter(path);
+        write = new FileWriter(currentPath);
         print_line = new PrintWriter(write);
         print_line.printf("%s" + "%n", "password:" + password);
         print_line.close();
@@ -630,12 +861,23 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JPanel classroomCreatePanel;
     private javax.swing.JScrollPane classroomTable;
     private javax.swing.JTable classroomTableDisplay;
+    private javax.swing.JLabel example1;
+    private javax.swing.JLabel example2;
+    private javax.swing.JLabel examplePrompt;
+    private javax.swing.JPanel filePanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel locationDesc1;
+    private javax.swing.JLabel locationDesc2;
+    private javax.swing.JLabel locationDesc3;
+    private javax.swing.JLabel locationPromptLabel;
     private javax.swing.JButton loginConfirm;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel loginTitle;
@@ -652,9 +894,13 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel newUsernamePrompt;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordPrompt;
+    private javax.swing.JButton pathConfirmButton;
+    private javax.swing.JTextField pathInput;
+    private javax.swing.JLabel pathOutput;
     private javax.swing.JButton studentInfoSubmitButton;
     private javax.swing.JTextField studentNameInput;
     private javax.swing.JTextField studentScoreInput;
+    private javax.swing.JLabel titlePrompt;
     private javax.swing.JSeparator titleSeperator;
     private javax.swing.JTextField usernameInput;
     private javax.swing.JLabel usernamePrompt;
