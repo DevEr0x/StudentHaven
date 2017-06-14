@@ -17,6 +17,7 @@ import java.nio.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -85,11 +86,20 @@ public class CulminatingProject extends javax.swing.JFrame {
         classroomCreatePanel = new javax.swing.JPanel();
         classroomTable = new javax.swing.JScrollPane();
         classroomTableDisplay = new javax.swing.JTable();
+        addStudentPanel = new javax.swing.JPanel();
         newStudentLabel = new javax.swing.JLabel();
-        newScoreLabel = new javax.swing.JLabel();
         studentNameInput = new javax.swing.JTextField();
+        newScoreLabel = new javax.swing.JLabel();
         studentScoreInput = new javax.swing.JTextField();
         studentInfoSubmitButton = new javax.swing.JButton();
+        addStudentPanelLabel = new javax.swing.JLabel();
+        editStudentPanel = new javax.swing.JPanel();
+        editStudentInfoSubmitButton = new javax.swing.JButton();
+        editStudentNameLabel = new javax.swing.JLabel();
+        selectedStudentInput = new javax.swing.JTextField();
+        editStudentScoreLabel = new javax.swing.JLabel();
+        newScoreInput = new javax.swing.JTextField();
+        editStudentPanelLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         activeAccount = new javax.swing.JLabel();
@@ -131,7 +141,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         locationPromptLabel.setText("Where should the files be stored:");
 
-        pathInput.setText("D:/");
+        pathInput.setText("Y:\\Documents/");
 
         pathConfirmButton.setText("Confirm");
         pathConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +198,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                     .addGroup(filePanelLayout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         filePanelLayout.setVerticalGroup(
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,7 +374,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                     .addComponent(accountOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                         .addComponent(newAccountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -384,7 +394,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         classroomTableDisplay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Student Name", "Score"
@@ -413,9 +423,22 @@ public class CulminatingProject extends javax.swing.JFrame {
             classroomTableDisplay.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        addStudentPanel.setBackground(new java.awt.Color(153, 153, 153));
+        addStudentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        newStudentLabel.setForeground(new java.awt.Color(0, 0, 204));
+        newStudentLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newStudentLabel.setText("Add Student Name:");
 
+        newScoreLabel.setForeground(new java.awt.Color(0, 0, 204));
+        newScoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newScoreLabel.setText("Add Student Score:");
+
+        studentScoreInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentScoreInputActionPerformed(evt);
+            }
+        });
 
         studentInfoSubmitButton.setText("Submit");
         studentInfoSubmitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -424,24 +447,106 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout addStudentPanelLayout = new javax.swing.GroupLayout(addStudentPanel);
+        addStudentPanel.setLayout(addStudentPanelLayout);
+        addStudentPanelLayout.setHorizontalGroup(
+            addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(studentInfoSubmitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(addStudentPanelLayout.createSequentialGroup()
+                .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(newStudentLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(newScoreLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(studentScoreInput)
+                    .addComponent(studentNameInput))
+                .addContainerGap())
+        );
+        addStudentPanelLayout.setVerticalGroup(
+            addStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newStudentLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(studentNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newScoreLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(studentScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(studentInfoSubmitButton))
+        );
+
+        addStudentPanelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        addStudentPanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addStudentPanelLabel.setText("Add Student");
+
+        editStudentPanel.setBackground(new java.awt.Color(153, 153, 153));
+        editStudentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        editStudentInfoSubmitButton.setText("Submit");
+        editStudentInfoSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editStudentInfoSubmitButtonActionPerformed(evt);
+            }
+        });
+
+        editStudentNameLabel.setForeground(new java.awt.Color(0, 0, 204));
+        editStudentNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editStudentNameLabel.setText("Student Name:");
+
+        editStudentScoreLabel.setForeground(new java.awt.Color(0, 0, 204));
+        editStudentScoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editStudentScoreLabel.setText("New Student Score:");
+
+        javax.swing.GroupLayout editStudentPanelLayout = new javax.swing.GroupLayout(editStudentPanel);
+        editStudentPanel.setLayout(editStudentPanelLayout);
+        editStudentPanelLayout.setHorizontalGroup(
+            editStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editStudentInfoSubmitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(editStudentNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(editStudentScoreLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+            .addGroup(editStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(editStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectedStudentInput)
+                    .addComponent(newScoreInput))
+                .addContainerGap())
+        );
+        editStudentPanelLayout.setVerticalGroup(
+            editStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editStudentNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedStudentInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editStudentScoreLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editStudentInfoSubmitButton))
+        );
+
+        editStudentPanelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        editStudentPanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editStudentPanelLabel.setText("Edit Student");
+
         javax.swing.GroupLayout classroomCreatePanelLayout = new javax.swing.GroupLayout(classroomCreatePanel);
         classroomCreatePanel.setLayout(classroomCreatePanelLayout);
         classroomCreatePanelLayout.setHorizontalGroup(
             classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addStudentPanelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(classroomCreatePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(newStudentLabel)
-                            .addComponent(newScoreLabel)
-                            .addComponent(studentNameInput)
-                            .addComponent(studentScoreInput, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(studentInfoSubmitButton)
-                        .addGap(18, 18, 18)))
+                    .addComponent(editStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -449,23 +554,21 @@ public class CulminatingProject extends javax.swing.JFrame {
             classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(classroomCreatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(classroomTable, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                    .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addStudentPanelLabel)
+                            .addComponent(editStudentPanelLabel))
+                        .addGap(2, 2, 2)
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(newStudentLabel)
-                .addGap(18, 18, 18)
-                .addComponent(studentNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(newScoreLabel)
-                .addGap(18, 18, 18)
-                .addComponent(studentScoreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-                .addComponent(studentInfoSubmitButton)
-                .addGap(29, 29, 29))
         );
 
-        mainPanelTabbed.addTab("Classroom Creation", null, classroomCreatePanel, "This is where you can add students");
+        mainPanelTabbed.addTab("Classroom", null, classroomCreatePanel, "This is where you can add students");
 
         jButton1.setText("Test the thing!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -479,7 +582,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(355, Short.MAX_VALUE)
+                .addContainerGap(356, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(353, 353, 353))
         );
@@ -524,7 +627,7 @@ public class CulminatingProject extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(titleSeperator)
-            .addComponent(mainPanelTabbed)
+            .addComponent(mainPanelTabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(activeAccount)
@@ -575,6 +678,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         if (LogIn(username, password) == "Logged in!") {
             activeAccount.setText("Welcome, " + username + "!");
             loggedIn = true;
+            addStudents();
         }
     }//GEN-LAST:event_loginConfirmActionPerformed
 
@@ -606,6 +710,14 @@ public class CulminatingProject extends javax.swing.JFrame {
             loggedIn = false;
             activeAccount.setText("Logged out.");
             accountOutput.setText("Logged out. Please log in to continue.");
+            DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+            int rows = model.getRowCount();
+            System.out.println(rows);
+            for (int i = 0; i < rows-1; i++) {
+                model.removeRow(i);
+            }
+            model.removeRow(0);
+
         } else {
             activeAccount.setText("You are not currently logged in.");
         }
@@ -645,10 +757,20 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_pathConfirmButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        addStudents();
+//        addStudents();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void addStudents() {
+    private void studentScoreInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentScoreInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentScoreInputActionPerformed
+
+    private void editStudentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentInfoSubmitButtonActionPerformed
+        String student = selectedStudentInput.getText();
+        String currentPath = path+"StudentHavenAccounts/Students/"+student+".txt";
+        
+    }//GEN-LAST:event_editStudentInfoSubmitButtonActionPerformed
+
+    public void addStudents() {                                                  //Add Students
         String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
         File textFile = new File(teacherPath);
         FileReader in;
@@ -660,8 +782,8 @@ public class CulminatingProject extends javax.swing.JFrame {
         String studentScore = null;
         int studentCount = 0;
 
-        String[] studentList = null;
-        String[] scoreList;
+        ArrayList studentList = new ArrayList();
+        ArrayList scoreList = new ArrayList();
 
         try {
             in = new FileReader(textFile);
@@ -671,13 +793,10 @@ public class CulminatingProject extends javax.swing.JFrame {
                     studentName = studentName.substring(col.length() + 1);
                     System.out.println(studentName);
                     studentCount++;
-                    String[] studentHolder = new String[studentCount];
-                    String[] scoreHolder = new String[studentCount];
-                    studentHolder[studentCount] = studentName;
-                    for (int i = 0; i < studentCount; i++) {
-                        System.out.println(studentHolder[i]);
-                    }
+
+                    studentList.add(studentName);
                 }
+                System.out.println(studentList);
             }
             readFile.close();
             in.close();
@@ -688,30 +807,44 @@ public class CulminatingProject extends javax.swing.JFrame {
             System.out.println("Problem reading file.");
             System.err.println("IOException: " + e.getMessage());
         }
-//        String studentPath = path + "StudentHavenAccounts/Students/" + studentList[0] + ".txt";
-//        textFile = new File(studentPath);
-//        col = "score";
-//
-//        try {
-//            in = new FileReader(textFile);
-//            readFile = new BufferedReader(in);
-//            while ((studentScore = readFile.readLine()) != null) {
-//                if (studentScore.contains(col + sep)) {
-//                    System.out.println("It found the score!");
-//                }
-//            }
-//            readFile.close();
-//            in.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("No account by that name.");
-//            System.err.println("FileNotFoundException: " + e.getMessage());
-//        } catch (IOException e) {
-//            System.out.println("Problem reading file.");
-//            System.err.println("IOException: " + e.getMessage());
-//        }
+
+        Object[] studentTracker = studentList.toArray();
+        for (int i = 0; i < studentCount; i++) {
+            String studentPath = path + "StudentHavenAccounts/Students/" + studentTracker[i] + ".txt";
+            textFile = new File(studentPath);
+            col = "score";
+
+            try {
+                in = new FileReader(textFile);
+                readFile = new BufferedReader(in);
+                while ((studentScore = readFile.readLine()) != null) {
+                    if (studentScore.contains(col + sep)) {
+                        studentScore = studentScore.substring(col.length() + 1);
+                        System.out.println(studentScore);
+                        scoreList.add(studentScore);
+                        System.out.println(scoreList);
+                    }
+                }
+                readFile.close();
+                in.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("No account by that name.");
+                System.err.println("FileNotFoundException: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Problem reading file.");
+                System.err.println("IOException: " + e.getMessage());
+            }
+        }
+        Object[] scoreTracker = scoreList.toArray();
+        for (int i = 0; i < studentCount; i++) {
+            Object[] row = {studentTracker[i], scoreTracker[i]};
+            DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+            model.addRow(row);
+            System.out.println("Did it!");
+        }
     }
 
-    public void newStudent(String student, int score, String username) throws IOException {
+    public void newStudent(String student, int score, String username) throws IOException { //New Student
         File textFile;
         String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
         String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
@@ -751,7 +884,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
     }
 
-    public String LogIn(String givenUsername, String givenPassword) {
+    public String LogIn(String givenUsername, String givenPassword) {           //Log in
         String currentPath = path + "StudentHavenAccounts/" + givenUsername + ".txt";
         File textFile = new File(currentPath);
         FileReader in;
@@ -787,7 +920,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         }
     }
 
-    public String NewAccount(String username, String password) throws IOException {
+    public String NewAccount(String username, String password) throws IOException { //Create account
         File textFile;
         String currentPath = path + "StudentHavenAccounts/" + username + ".txt";
         FileWriter write;
@@ -858,9 +991,16 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel accountOutput;
     private javax.swing.JPanel accountPanel;
     private javax.swing.JLabel activeAccount;
+    private javax.swing.JPanel addStudentPanel;
+    private javax.swing.JLabel addStudentPanelLabel;
     private javax.swing.JPanel classroomCreatePanel;
     private javax.swing.JScrollPane classroomTable;
     private javax.swing.JTable classroomTableDisplay;
+    private javax.swing.JButton editStudentInfoSubmitButton;
+    private javax.swing.JLabel editStudentNameLabel;
+    private javax.swing.JPanel editStudentPanel;
+    private javax.swing.JLabel editStudentPanelLabel;
+    private javax.swing.JLabel editStudentScoreLabel;
     private javax.swing.JLabel example1;
     private javax.swing.JLabel example2;
     private javax.swing.JLabel examplePrompt;
@@ -888,6 +1028,7 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel newAccountTitle;
     private javax.swing.JPasswordField newPasswordInput;
     private javax.swing.JLabel newPasswordPrompt;
+    private javax.swing.JTextField newScoreInput;
     private javax.swing.JLabel newScoreLabel;
     private javax.swing.JLabel newStudentLabel;
     private javax.swing.JTextField newUsernameInput;
@@ -897,6 +1038,7 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JButton pathConfirmButton;
     private javax.swing.JTextField pathInput;
     private javax.swing.JLabel pathOutput;
+    private javax.swing.JTextField selectedStudentInput;
     private javax.swing.JButton studentInfoSubmitButton;
     private javax.swing.JTextField studentNameInput;
     private javax.swing.JTextField studentScoreInput;
