@@ -64,7 +64,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         examplePrompt = new javax.swing.JLabel();
         example1 = new javax.swing.JLabel();
         example2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        redNoteLocationLabel = new javax.swing.JLabel();
         accountPanel = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         loginTitle = new javax.swing.JLabel();
@@ -100,8 +100,14 @@ public class CulminatingProject extends javax.swing.JFrame {
         editStudentScoreLabel = new javax.swing.JLabel();
         newScoreInput = new javax.swing.JTextField();
         editStudentPanelLabel = new javax.swing.JLabel();
+        deleteStudentPanel = new javax.swing.JPanel();
+        deleteStudentConfirm = new javax.swing.JButton();
+        deleteStudentPrompt = new javax.swing.JLabel();
+        deleteStudentInput = new javax.swing.JTextField();
+        deleteStudentPanelLabel = new javax.swing.JLabel();
+        classroomOutput = new javax.swing.JLabel();
+        updateTable = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         activeAccount = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -141,7 +147,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         locationPromptLabel.setText("Where should the files be stored:");
 
-        pathInput.setText("Y:\\Documents/");
+        pathInput.setText("D:/");
 
         pathConfirmButton.setText("Confirm");
         pathConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -161,9 +167,9 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         example2.setText("C:/Program Files (x86)/");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("Make sure that you include a \"/\" at the end of the directory");
+        redNoteLocationLabel.setFont(new java.awt.Font("Tahoma", 3, 15)); // NOI18N
+        redNoteLocationLabel.setForeground(new java.awt.Color(255, 0, 51));
+        redNoteLocationLabel.setText("Make sure that you include a \"/\" at the end of the directory");
 
         javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
         filePanel.setLayout(filePanelLayout);
@@ -197,8 +203,8 @@ public class CulminatingProject extends javax.swing.JFrame {
                         .addComponent(locationDesc3))
                     .addGroup(filePanelLayout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(redNoteLocationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         filePanelLayout.setVerticalGroup(
             filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +230,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(example2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addComponent(redNoteLocationLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addComponent(pathOutput)
                 .addContainerGap())
@@ -374,7 +380,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                     .addComponent(accountOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(accountPanelLayout.createSequentialGroup()
                         .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                         .addComponent(newAccountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -532,21 +538,104 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         editStudentPanelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         editStudentPanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editStudentPanelLabel.setText("Edit Student");
+        editStudentPanelLabel.setText("Edit Student Score");
+
+        deleteStudentPanel.setBackground(new java.awt.Color(153, 153, 153));
+        deleteStudentPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        deleteStudentConfirm.setText("Confirm");
+        deleteStudentConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStudentConfirmActionPerformed(evt);
+            }
+        });
+
+        deleteStudentPrompt.setForeground(new java.awt.Color(0, 0, 204));
+        deleteStudentPrompt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteStudentPrompt.setText("Student Name:");
+
+        javax.swing.GroupLayout deleteStudentPanelLayout = new javax.swing.GroupLayout(deleteStudentPanel);
+        deleteStudentPanel.setLayout(deleteStudentPanelLayout);
+        deleteStudentPanelLayout.setHorizontalGroup(
+            deleteStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(deleteStudentConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deleteStudentPrompt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deleteStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deleteStudentInput)
+                .addContainerGap())
+        );
+        deleteStudentPanelLayout.setVerticalGroup(
+            deleteStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deleteStudentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deleteStudentPrompt)
+                .addGap(18, 18, 18)
+                .addComponent(deleteStudentInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(deleteStudentConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        deleteStudentPanelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        deleteStudentPanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleteStudentPanelLabel.setText("Delete Student");
+
+        classroomOutput.setForeground(new java.awt.Color(255, 0, 0));
+        classroomOutput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        classroomOutput.setText("Classroom Editing");
+
+        updateTable.setText("Update Table");
+        updateTable.setToolTipText("Sometimes the variables glitch up, if you need to restore the table, click this.");
+        updateTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateTableActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout classroomCreatePanelLayout = new javax.swing.GroupLayout(classroomCreatePanel);
         classroomCreatePanel.setLayout(classroomCreatePanelLayout);
         classroomCreatePanelLayout.setHorizontalGroup(
             classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
-                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addStudentPanelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                    .addComponent(classroomOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                                .addComponent(deleteStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                                        .addComponent(addStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(editStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                                        .addComponent(addStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(editStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(updateTable)))
+                .addGap(6, 6, 6)
                 .addComponent(classroomTable, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -564,42 +653,25 @@ public class CulminatingProject extends javax.swing.JFrame {
                         .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteStudentPanelLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(updateTable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(classroomOutput)))
                 .addContainerGap())
         );
 
         mainPanelTabbed.addTab("Classroom", null, classroomCreatePanel, "This is where you can add students");
 
-        jButton1.setText("Test the thing!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(356, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(353, 353, 353))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jButton1)
-                .addContainerGap(208, Short.MAX_VALUE))
-        );
-
-        mainPanelTabbed.addTab("Testing Tab", jPanel1);
-
         activeAccount.setForeground(new java.awt.Color(0, 0, 255));
         activeAccount.setText("Not logged in.");
 
-        jMenu1.setText("File");
+        jMenu1.setText("Options");
 
         jMenuItem1.setText("Log out");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -627,7 +699,7 @@ public class CulminatingProject extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(titleSeperator)
-            .addComponent(mainPanelTabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+            .addComponent(mainPanelTabbed)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(activeAccount)
@@ -649,6 +721,145 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (loggedIn) {
+            loggedIn = false;
+            activeAccount.setText("Logged out.");
+            accountOutput.setText("Logged out. Please log in to continue.");
+            emptyTable();
+
+        } else {
+            activeAccount.setText("You are not currently logged in.");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void mainPanelTabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelTabbedMouseClicked
+
+    }//GEN-LAST:event_mainPanelTabbedMouseClicked
+
+    private void deleteStudentConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentConfirmActionPerformed
+        String student = deleteStudentInput.getText();
+        String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
+        String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+
+        String sep = ":";
+        String col = "student";
+
+        File textFile = new File(studentPath);
+        FileReader in;
+        BufferedReader readFile;
+
+        ArrayList list = new ArrayList();
+        int listCounter = 0;
+
+        if (textFile.delete()) {
+            classroomOutput.setText("Deleted a student");
+        } else {
+            classroomOutput.setText("Error: Student was not removed.");
+        }
+
+        System.out.println("Eric, you didn't finish this feature, look at the code.");
+        //Check the [private void editStudentInfoSubmitButtonActionPerformed] right below this void for reference on how to build this method.
+    }//GEN-LAST:event_deleteStudentConfirmActionPerformed
+
+    private void editStudentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentInfoSubmitButtonActionPerformed
+        String student = selectedStudentInput.getText();
+        String score = newScoreInput.getText();
+        String currentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
+        String scoreTBC = null;
+        String line = null;
+
+        File textFile = new File(currentPath);
+        FileReader in;
+        BufferedReader readFile;
+
+        String sep = ":";
+        String col = "score";
+
+        ArrayList list = new ArrayList();
+        int listCounter = 0;
+
+        try {
+            in = new FileReader(textFile);
+            readFile = new BufferedReader(in);
+            while ((line = readFile.readLine()) != null) {
+                listCounter++;
+                list.add(line);
+            }
+            readFile.close();
+            in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No account by that name.");
+            classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
+            System.err.println("FileNotFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Problem reading file.");
+            classroomOutput.setText("There was a problem reading the file, please try again.");
+            System.err.println("IOException: " + e.getMessage());
+        }
+
+        Object[] listTracker = list.toArray();
+
+        for (int i = 0; i < listCounter; i++) {
+            String test = listTracker[i].toString();
+            if (test.contains(col + sep)) {
+                scoreTBC = test.substring(col.length() + 1);
+                test = test.replaceAll(scoreTBC, score);
+                System.out.println(test);
+                listTracker[i] = test;
+            }
+        }
+
+        FileWriter write = null;
+        PrintWriter print_line;
+        try {
+            write = new FileWriter(currentPath);
+        } catch (IOException ex) {
+            Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        print_line = new PrintWriter(write);
+        for (int i = 0; i < listCounter; i++) {
+            print_line.printf("%s" + "%n", listTracker[i]);
+        }
+        print_line.close();
+        emptyTable();
+        addStudents();
+        classroomOutput.setText("Student score changed sucessfully");
+    }//GEN-LAST:event_editStudentInfoSubmitButtonActionPerformed
+
+    private void studentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentInfoSubmitButtonActionPerformed
+        String student;
+        int score;
+        student = studentNameInput.getText();
+        score = Integer.parseInt(studentScoreInput.getText());
+
+        if (loggedIn) {
+            System.out.println("Student Name:" + student);
+            System.out.println("Student Score:" + score);
+            try {
+                newStudent(student, score, username);
+                System.out.println("All good! New Student Created!");
+                classroomOutput.setText("New Student added! " + student + ", " + score);
+            } catch (IOException ex) {
+                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("There was an error!");
+                classroomOutput.setText("An error occured");
+                System.err.println("Error:" + ex);
+            }
+        } else {
+            System.out.println("You're not logged in! Please log in to edit student information!");
+            classroomOutput.setText("Log in to edit student information!");
+        }
+    }//GEN-LAST:event_studentInfoSubmitButtonActionPerformed
+
+    private void studentScoreInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentScoreInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_studentScoreInputActionPerformed
 
     private void newAccountConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAccountConfirmActionPerformed
         String username;
@@ -682,55 +893,6 @@ public class CulminatingProject extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginConfirmActionPerformed
 
-    private void studentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentInfoSubmitButtonActionPerformed
-        String student;
-        int score;
-        student = studentNameInput.getText();
-        score = Integer.parseInt(studentScoreInput.getText());
-
-        if (loggedIn) {
-            System.out.println("Student Name:" + student);
-            System.out.println("Student Score:" + score);
-            try {
-                newStudent(student, score, username);
-                System.out.println("All good! New Student Created!");
-            } catch (IOException ex) {
-                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("There was an error!");
-                System.err.println("Error:" + ex);
-            }
-        } else {
-            System.out.println("You're not logged in! Please log in to edit student information!");
-            activeAccount.setText("Log in to edit student information!");
-        }
-    }//GEN-LAST:event_studentInfoSubmitButtonActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (loggedIn) {
-            loggedIn = false;
-            activeAccount.setText("Logged out.");
-            accountOutput.setText("Logged out. Please log in to continue.");
-            DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-            int rows = model.getRowCount();
-            System.out.println(rows);
-            for (int i = 0; i < rows-1; i++) {
-                model.removeRow(i);
-            }
-            model.removeRow(0);
-
-        } else {
-            activeAccount.setText("You are not currently logged in.");
-        }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void mainPanelTabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelTabbedMouseClicked
-
-    }//GEN-LAST:event_mainPanelTabbedMouseClicked
-
     private void pathConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathConfirmButtonActionPerformed
         String filePath;
         filePath = pathInput.getText();
@@ -756,19 +918,19 @@ public class CulminatingProject extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pathConfirmButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        addStudents();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void updateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTableActionPerformed
+        emptyTable();
+        addStudents();
+    }//GEN-LAST:event_updateTableActionPerformed
 
-    private void studentScoreInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentScoreInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_studentScoreInputActionPerformed
-
-    private void editStudentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentInfoSubmitButtonActionPerformed
-        String student = selectedStudentInput.getText();
-        String currentPath = path+"StudentHavenAccounts/Students/"+student+".txt";
-        
-    }//GEN-LAST:event_editStudentInfoSubmitButtonActionPerformed
+    public void emptyTable() {
+        DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+        int rows = model.getRowCount();
+        System.out.println(rows);
+        for (int i = 0; i < rows - 1; i++) {
+            model.removeRow(0);
+        }
+    }
 
     public void addStudents() {                                                  //Add Students
         String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
@@ -994,8 +1156,14 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JPanel addStudentPanel;
     private javax.swing.JLabel addStudentPanelLabel;
     private javax.swing.JPanel classroomCreatePanel;
+    private javax.swing.JLabel classroomOutput;
     private javax.swing.JScrollPane classroomTable;
     private javax.swing.JTable classroomTableDisplay;
+    private javax.swing.JButton deleteStudentConfirm;
+    private javax.swing.JTextField deleteStudentInput;
+    private javax.swing.JPanel deleteStudentPanel;
+    private javax.swing.JLabel deleteStudentPanelLabel;
+    private javax.swing.JLabel deleteStudentPrompt;
     private javax.swing.JButton editStudentInfoSubmitButton;
     private javax.swing.JLabel editStudentNameLabel;
     private javax.swing.JPanel editStudentPanel;
@@ -1005,8 +1173,6 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel example2;
     private javax.swing.JLabel examplePrompt;
     private javax.swing.JPanel filePanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1038,12 +1204,14 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JButton pathConfirmButton;
     private javax.swing.JTextField pathInput;
     private javax.swing.JLabel pathOutput;
+    private javax.swing.JLabel redNoteLocationLabel;
     private javax.swing.JTextField selectedStudentInput;
     private javax.swing.JButton studentInfoSubmitButton;
     private javax.swing.JTextField studentNameInput;
     private javax.swing.JTextField studentScoreInput;
     private javax.swing.JLabel titlePrompt;
     private javax.swing.JSeparator titleSeperator;
+    private javax.swing.JButton updateTable;
     private javax.swing.JTextField usernameInput;
     private javax.swing.JLabel usernamePrompt;
     // End of variables declaration//GEN-END:variables
