@@ -104,15 +104,23 @@ public class CulminatingProject extends javax.swing.JFrame {
         deleteStudentConfirm = new javax.swing.JButton();
         deleteStudentPrompt = new javax.swing.JLabel();
         deleteStudentInput = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         deleteStudentPanelLabel = new javax.swing.JLabel();
         classroomOutput = new javax.swing.JLabel();
         updateTable = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        editNamePanel = new javax.swing.JPanel();
+        oldStudentName = new javax.swing.JLabel();
+        oldStudentInput = new javax.swing.JTextField();
+        newStudentName = new javax.swing.JLabel();
+        newStudentInput = new javax.swing.JTextField();
+        editStudentNameSubmitButton = new javax.swing.JButton();
+        editStudentNamePanelLabel = new javax.swing.JLabel();
         activeAccount = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,7 +155,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         locationPromptLabel.setText("Where should the files be stored:");
 
-        pathInput.setText("D:/");
+        pathInput.setText("Y:/Documents/");
 
         pathConfirmButton.setText("Confirm");
         pathConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -554,16 +562,22 @@ public class CulminatingProject extends javax.swing.JFrame {
         deleteStudentPrompt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         deleteStudentPrompt.setText("Student Name:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Can't be recovered");
+
         javax.swing.GroupLayout deleteStudentPanelLayout = new javax.swing.GroupLayout(deleteStudentPanel);
         deleteStudentPanel.setLayout(deleteStudentPanelLayout);
         deleteStudentPanelLayout.setHorizontalGroup(
             deleteStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(deleteStudentConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(deleteStudentPrompt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+            .addComponent(deleteStudentPrompt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deleteStudentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(deleteStudentInput)
                 .addContainerGap())
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         deleteStudentPanelLayout.setVerticalGroup(
             deleteStudentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,7 +586,9 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addComponent(deleteStudentPrompt)
                 .addGap(18, 18, 18)
                 .addComponent(deleteStudentInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteStudentConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -592,19 +608,56 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        editNamePanel.setBackground(new java.awt.Color(153, 153, 153));
+        editNamePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        oldStudentName.setForeground(new java.awt.Color(0, 0, 204));
+        oldStudentName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        oldStudentName.setText("Student Name:");
+
+        newStudentName.setForeground(new java.awt.Color(0, 0, 204));
+        newStudentName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        newStudentName.setText("New Student Name:");
+
+        editStudentNameSubmitButton.setText("Submit");
+        editStudentNameSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editStudentNameSubmitButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout editNamePanelLayout = new javax.swing.GroupLayout(editNamePanel);
+        editNamePanel.setLayout(editNamePanelLayout);
+        editNamePanelLayout.setHorizontalGroup(
+            editNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(oldStudentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(newStudentName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(editNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(editNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newStudentInput)
+                    .addComponent(oldStudentInput))
+                .addContainerGap())
+            .addComponent(editStudentNameSubmitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        editNamePanelLayout.setVerticalGroup(
+            editNamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editNamePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(oldStudentName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(oldStudentInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newStudentName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newStudentInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editStudentNameSubmitButton))
         );
+
+        editStudentNamePanelLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        editStudentNamePanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editStudentNamePanelLabel.setText("Edit Student Name");
 
         javax.swing.GroupLayout classroomCreatePanelLayout = new javax.swing.GroupLayout(classroomCreatePanel);
         classroomCreatePanel.setLayout(classroomCreatePanelLayout);
@@ -616,11 +669,6 @@ public class CulminatingProject extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deleteStudentPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
-                                .addComponent(deleteStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -631,7 +679,17 @@ public class CulminatingProject extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
                                         .addComponent(addStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(editStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(editStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(deleteStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(deleteStudentPanelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(classroomCreatePanelLayout.createSequentialGroup()
+                                        .addComponent(editStudentNamePanelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(4, 4, 4))
+                                    .addComponent(editNamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, classroomCreatePanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(updateTable)))
@@ -654,11 +712,13 @@ public class CulminatingProject extends javax.swing.JFrame {
                             .addComponent(addStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(editStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteStudentPanelLabel)
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(deleteStudentPanelLabel)
+                            .addComponent(editStudentNamePanelLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(classroomCreatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(updateTable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -688,6 +748,14 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Kaune");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -743,28 +811,79 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_mainPanelTabbedMouseClicked
 
     private void deleteStudentConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentConfirmActionPerformed
-        String student = deleteStudentInput.getText();
-        String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
-        String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+        if (loggedIn) {
+            String student = deleteStudentInput.getText();
+            String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
+            String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+            String line = null;
 
-        String sep = ":";
-        String col = "student";
+            String sep = ":";
+            String col = "student";
 
-        File textFile = new File(studentPath);
-        FileReader in;
-        BufferedReader readFile;
+            File textFile = new File(studentPath);
+            FileReader in;
+            BufferedReader readFile;
 
-        ArrayList list = new ArrayList();
-        int listCounter = 0;
+            ArrayList list = new ArrayList();
+            int listCounter = 0;
 
-        if (textFile.delete()) {
-            classroomOutput.setText("Deleted a student");
+            if (textFile.delete()) {
+                textFile = new File(teacherPath);
+
+                try {
+                    in = new FileReader(textFile);
+                    readFile = new BufferedReader(in);
+                    while ((line = readFile.readLine()) != null) {
+                        listCounter++;
+                        list.add(line);
+                    }
+                    readFile.close();
+                    in.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("No account by that name.");
+                    classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
+                    System.err.println("FileNotFoundException: " + e.getMessage());
+                } catch (IOException e) {
+                    System.out.println("Problem reading file.");
+                    classroomOutput.setText("There was a problem reading the file, please try again.");
+                    System.err.println("IOException: " + e.getMessage());
+                }
+
+                Object[] listTracker = list.toArray();
+
+                for (int i = 0; i < listCounter; i++) {
+                    String test = listTracker[i].toString();
+                    if (test.contains(col + sep + student)) {
+                        test = test.replaceAll(test, "");
+                        System.out.println(test);
+                        listTracker[i] = test;
+                    }
+                }
+                FileWriter write = null;
+                PrintWriter print_line;
+                try {
+                    write = new FileWriter(teacherPath);
+                } catch (IOException ex) {
+                    Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                print_line = new PrintWriter(write);
+                for (int i = 0; i < listCounter; i++) {
+                    print_line.printf("%s" + "%n", listTracker[i]);
+                }
+                print_line.close();
+                emptyTable();
+                addStudents();
+
+                classroomOutput.setText("Deleted the student");
+            } else {
+                classroomOutput.setText("Error: That Student was not removed.");
+            }
+
+            System.out.println("Eric, you didn't finish this feature, look at the code.");
+            //Check the [private void editStudentInfoSubmitButtonActionPerformed] right below this void for reference on how to build this method.
         } else {
-            classroomOutput.setText("Error: Student was not removed.");
+            classroomOutput.setText("You must be logged in to edit student information!");
         }
-
-        System.out.println("Eric, you didn't finish this feature, look at the code.");
-        //Check the [private void editStudentInfoSubmitButtonActionPerformed] right below this void for reference on how to build this method.
     }//GEN-LAST:event_deleteStudentConfirmActionPerformed
 
     private void editStudentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentInfoSubmitButtonActionPerformed
@@ -784,52 +903,56 @@ public class CulminatingProject extends javax.swing.JFrame {
         ArrayList list = new ArrayList();
         int listCounter = 0;
 
-        try {
-            in = new FileReader(textFile);
-            readFile = new BufferedReader(in);
-            while ((line = readFile.readLine()) != null) {
-                listCounter++;
-                list.add(line);
+        if (loggedIn) {
+            try {
+                in = new FileReader(textFile);
+                readFile = new BufferedReader(in);
+                while ((line = readFile.readLine()) != null) {
+                    listCounter++;
+                    list.add(line);
+                }
+                readFile.close();
+                in.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("No account by that name.");
+                classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
+                System.err.println("FileNotFoundException: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Problem reading file.");
+                classroomOutput.setText("There was a problem reading the file, please try again.");
+                System.err.println("IOException: " + e.getMessage());
             }
-            readFile.close();
-            in.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No account by that name.");
-            classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
-            System.err.println("FileNotFoundException: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem reading file.");
-            classroomOutput.setText("There was a problem reading the file, please try again.");
-            System.err.println("IOException: " + e.getMessage());
-        }
 
-        Object[] listTracker = list.toArray();
+            Object[] listTracker = list.toArray();
 
-        for (int i = 0; i < listCounter; i++) {
-            String test = listTracker[i].toString();
-            if (test.contains(col + sep)) {
-                scoreTBC = test.substring(col.length() + 1);
-                test = test.replaceAll(scoreTBC, score);
-                System.out.println(test);
-                listTracker[i] = test;
+            for (int i = 0; i < listCounter; i++) {
+                String test = listTracker[i].toString();
+                if (test.contains(col + sep)) {
+                    scoreTBC = test.substring(col.length() + 1);
+                    test = test.replaceAll(scoreTBC, score);
+                    System.out.println(test);
+                    listTracker[i] = test;
+                }
             }
-        }
 
-        FileWriter write = null;
-        PrintWriter print_line;
-        try {
-            write = new FileWriter(currentPath);
-        } catch (IOException ex) {
-            Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+            FileWriter write = null;
+            PrintWriter print_line;
+            try {
+                write = new FileWriter(currentPath);
+            } catch (IOException ex) {
+                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            print_line = new PrintWriter(write);
+            for (int i = 0; i < listCounter; i++) {
+                print_line.printf("%s" + "%n", listTracker[i]);
+            }
+            print_line.close();
+            emptyTable();
+            addStudents();
+            classroomOutput.setText("Student score changed sucessfully");
+        } else {
+            classroomOutput.setText("You must be logged in to edit student information!");
         }
-        print_line = new PrintWriter(write);
-        for (int i = 0; i < listCounter; i++) {
-            print_line.printf("%s" + "%n", listTracker[i]);
-        }
-        print_line.close();
-        emptyTable();
-        addStudents();
-        classroomOutput.setText("Student score changed sucessfully");
     }//GEN-LAST:event_editStudentInfoSubmitButtonActionPerformed
 
     private void studentInfoSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentInfoSubmitButtonActionPerformed
@@ -919,73 +1042,81 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_pathConfirmButtonActionPerformed
 
     private void updateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTableActionPerformed
-        emptyTable();
-        addStudents();
+        if (loggedIn) {
+            emptyTable();
+            addStudents();
+        } else {
+            classroomOutput.setText("You must be logged in to edit student information!");
+        }
     }//GEN-LAST:event_updateTableActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.out.println("Give me extra credit- I mean... Kaune Rules!");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void editStudentNameSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStudentNameSubmitButtonActionPerformed
+        if (loggedIn) {
+            String oldStudent = oldStudentInput.getText();
+            String newStudent = newStudentInput.getText();
+            String studentPath = path + "StudentHavenAccounts/Students/" + oldStudent + ".txt";
+            String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+
+            File textFile = new File(teacherPath);
+            FileReader in;
+            BufferedReader readFile;
+
+            String sep = ":";
+            String col = "student";
+
+            ArrayList studentList = new ArrayList();
+            ArrayList scoreList = new ArrayList();
+            studentList.clear();
+            scoreList.clear();
+
+        } else {
+            classroomOutput.setText("You must be logged in to edit student information!");
+        }
+    }//GEN-LAST:event_editStudentNameSubmitButtonActionPerformed
 
     public void emptyTable() {
         DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
         int rows = model.getRowCount();
         System.out.println(rows);
-        for (int i = 0; i < rows - 1; i++) {
+        for (int i = 0; i < rows; i++) {
             model.removeRow(0);
         }
     }
 
     public void addStudents() {                                                  //Add Students
-        String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
-        File textFile = new File(teacherPath);
-        FileReader in;
-        BufferedReader readFile;
+        if (loggedIn) {
+            String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
+            File textFile = new File(teacherPath);
+            FileReader in;
+            BufferedReader readFile;
 
-        String sep = ":";
-        String col = "student";
-        String studentName = null;
-        String studentScore = null;
-        int studentCount = 0;
+            String sep = ":";
+            String col = "student";
+            String studentName = null;
+            String studentScore = null;
+            int studentCount = 0;
 
-        ArrayList studentList = new ArrayList();
-        ArrayList scoreList = new ArrayList();
-
-        try {
-            in = new FileReader(textFile);
-            readFile = new BufferedReader(in);
-            while ((studentName = readFile.readLine()) != null) {
-                if (studentName.contains(col + sep)) {
-                    studentName = studentName.substring(col.length() + 1);
-                    System.out.println(studentName);
-                    studentCount++;
-
-                    studentList.add(studentName);
-                }
-                System.out.println(studentList);
-            }
-            readFile.close();
-            in.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No account by that name.");
-            System.err.println("FileNotFoundException: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem reading file.");
-            System.err.println("IOException: " + e.getMessage());
-        }
-
-        Object[] studentTracker = studentList.toArray();
-        for (int i = 0; i < studentCount; i++) {
-            String studentPath = path + "StudentHavenAccounts/Students/" + studentTracker[i] + ".txt";
-            textFile = new File(studentPath);
-            col = "score";
+            ArrayList studentList = new ArrayList();
+            ArrayList scoreList = new ArrayList();
+            studentList.clear();
+            scoreList.clear();
 
             try {
                 in = new FileReader(textFile);
                 readFile = new BufferedReader(in);
-                while ((studentScore = readFile.readLine()) != null) {
-                    if (studentScore.contains(col + sep)) {
-                        studentScore = studentScore.substring(col.length() + 1);
-                        System.out.println(studentScore);
-                        scoreList.add(studentScore);
-                        System.out.println(scoreList);
+                while ((studentName = readFile.readLine()) != null) {
+                    if (studentName.contains(col + sep)) {
+                        studentName = studentName.substring(col.length() + 1);
+                        System.out.println(studentName);
+                        studentCount++;
+
+                        studentList.add(studentName);
                     }
+                    System.out.println(studentList);
                 }
                 readFile.close();
                 in.close();
@@ -996,13 +1127,43 @@ public class CulminatingProject extends javax.swing.JFrame {
                 System.out.println("Problem reading file.");
                 System.err.println("IOException: " + e.getMessage());
             }
-        }
-        Object[] scoreTracker = scoreList.toArray();
-        for (int i = 0; i < studentCount; i++) {
-            Object[] row = {studentTracker[i], scoreTracker[i]};
+
+            Object[] studentTracker = studentList.toArray();
+            for (int i = 0; i < studentCount; i++) {
+                String studentPath = path + "StudentHavenAccounts/Students/" + studentTracker[i] + ".txt";
+                textFile = new File(studentPath);
+                col = "score";
+
+                try {
+                    in = new FileReader(textFile);
+                    readFile = new BufferedReader(in);
+                    while ((studentScore = readFile.readLine()) != null) {
+                        if (studentScore.contains(col + sep)) {
+                            studentScore = studentScore.substring(col.length() + 1);
+                            System.out.println(studentScore);
+                            scoreList.add(studentScore);
+                            System.out.println(scoreList);
+                        }
+                    }
+                    readFile.close();
+                    in.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("No account by that name.");
+                    System.err.println("FileNotFoundException: " + e.getMessage());
+                } catch (IOException e) {
+                    System.out.println("Problem reading file.");
+                    System.err.println("IOException: " + e.getMessage());
+                }
+            }
+            Object[] scoreTracker = scoreList.toArray();
             DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-            model.addRow(row);
-            System.out.println("Did it!");
+            for (int i = 0; i < studentCount; i++) {
+                Object[] row = {studentTracker[i], scoreTracker[i]};
+                model.addRow(row);
+                System.out.println("Did it!");
+            }
+        } else {
+            classroomOutput.setText("You must be logged in to edit student information!");
         }
     }
 
@@ -1164,8 +1325,11 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JPanel deleteStudentPanel;
     private javax.swing.JLabel deleteStudentPanelLabel;
     private javax.swing.JLabel deleteStudentPrompt;
+    private javax.swing.JPanel editNamePanel;
     private javax.swing.JButton editStudentInfoSubmitButton;
     private javax.swing.JLabel editStudentNameLabel;
+    private javax.swing.JLabel editStudentNamePanelLabel;
+    private javax.swing.JButton editStudentNameSubmitButton;
     private javax.swing.JPanel editStudentPanel;
     private javax.swing.JLabel editStudentPanelLabel;
     private javax.swing.JLabel editStudentScoreLabel;
@@ -1173,11 +1337,12 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel example2;
     private javax.swing.JLabel examplePrompt;
     private javax.swing.JPanel filePanel;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel locationDesc1;
@@ -1196,9 +1361,13 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel newPasswordPrompt;
     private javax.swing.JTextField newScoreInput;
     private javax.swing.JLabel newScoreLabel;
+    private javax.swing.JTextField newStudentInput;
     private javax.swing.JLabel newStudentLabel;
+    private javax.swing.JLabel newStudentName;
     private javax.swing.JTextField newUsernameInput;
     private javax.swing.JLabel newUsernamePrompt;
+    private javax.swing.JTextField oldStudentInput;
+    private javax.swing.JLabel oldStudentName;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordPrompt;
     private javax.swing.JButton pathConfirmButton;
