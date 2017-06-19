@@ -458,7 +458,7 @@ public class CulminatingProject extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(numTestInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(numTestConfirmButton)
+                .addComponent(numTestConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -473,14 +473,14 @@ public class CulminatingProject extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student Name", "Score"
+                "Student Name"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -496,7 +496,6 @@ public class CulminatingProject extends javax.swing.JFrame {
         classroomTable.setViewportView(classroomTableDisplay);
         if (classroomTableDisplay.getColumnModel().getColumnCount() > 0) {
             classroomTableDisplay.getColumnModel().getColumn(0).setResizable(false);
-            classroomTableDisplay.getColumnModel().getColumn(1).setResizable(false);
         }
 
         addStudentPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -978,19 +977,21 @@ public class CulminatingProject extends javax.swing.JFrame {
             classroomOutput.setText("Please fill out both fields");
             return;
         }
-        int score;
-        score = Integer.parseInt(studentScoreInput.getText());
+        String score;
+        score = studentScoreInput.getText();
+        if (score.equals("")) {
+            classroomOutput.setText("Please fill out both fields");
+            return;
+        }
         if (loggedIn) {
-            if (score > 100) {
-                classroomOutput.setText("You can't score over 100!");
-                return;
-            }
+//            if (Integer.parseInt(score) > 100) {
+//                classroomOutput.setText("You can't score over 100!");
+//                return;
+//            }
             System.out.println("Student Name:" + student);
             System.out.println("Student Score:" + score);
             try {
                 newStudent(student, score, username);
-                System.out.println("All good! New Student Created!");
-                classroomOutput.setText("New Student added! " + student + ", " + score);
             } catch (IOException ex) {
                 Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("There was an error!");
@@ -999,6 +1000,8 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
             studentNameInput.setText("");
             studentScoreInput.setText("");
+            System.out.println("All good! New Student Created!");
+            classroomOutput.setText("New Student added! " + student + ", " + score);
         } else {
             System.out.println("You're not logged in! Please log in to edit student information!");
             classroomOutput.setText("Log in to edit student information!");
@@ -1073,17 +1076,61 @@ public class CulminatingProject extends javax.swing.JFrame {
     private void numTestConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numTestConfirmButtonActionPerformed
         if (loggedIn) {
             String currentPath = path + "StudentHavenAccounts/" + username + ".txt";
-            FileWriter write;
+            FileWriter write = null;
             PrintWriter print_line;
             File textFile = new File(currentPath);
+            FileReader in;
+            BufferedReader readFile;
+            String line = null;
+            int listCounter = 0;
+            ArrayList list = new ArrayList();
+
+            String col = "tests";
+            String sep = ":";
 
             numTests = Integer.parseInt(numTestInput.getText());
-            DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-            String collumnName;
-            for (int i = 0; i < numTests; i++) {
-                collumnName = "Test" + i;
-                model.addColumn(collumnName);
+
+            try {
+                in = new FileReader(textFile);
+                readFile = new BufferedReader(in);
+                while ((line = readFile.readLine()) != null) {
+                    listCounter++;
+                    list.add(line);
+                }
+                readFile.close();
+                in.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("No account by that name.");
+                classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
+                System.err.println("FileNotFoundException: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Problem reading file.");
+                classroomOutput.setText("There was a problem reading the file, please try again.");
+                System.err.println("IOException: " + e.getMessage());
             }
+            Object[] listTracker = list.toArray();
+            for (int i = 0; i < listCounter; i++) {
+                String test = listTracker[i].toString();
+                if (test.contains(col + sep)) {
+                    System.out.println("Already set.");
+                    return;
+                }
+            }
+
+            listCounter += 1;
+            list.add("tests:" + numTests);
+
+            try {
+                write = new FileWriter(currentPath);
+            } catch (IOException ex) {
+                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            print_line = new PrintWriter(write);
+            for (int i = 0; i < listCounter; i++) {
+                print_line.printf("%s" + "%n", listTracker[i]);
+            }
+            print_line.close();
+            addStudents();
         }
     }//GEN-LAST:event_numTestConfirmButtonActionPerformed
 
@@ -1094,6 +1141,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         for (int i = 0; i < rows; i++) {
             model.removeRow(0);
         }
+        model.setColumnCount(1);
     }
 
     public void addStudents() {                                                  //Add Students
@@ -1111,8 +1159,6 @@ public class CulminatingProject extends javax.swing.JFrame {
 
             ArrayList studentList = new ArrayList();
             ArrayList scoreList = new ArrayList();
-            studentList.clear();
-            scoreList.clear();
 
             try {
                 in = new FileReader(textFile);
@@ -1164,10 +1210,21 @@ public class CulminatingProject extends javax.swing.JFrame {
                     System.err.println("IOException: " + e.getMessage());
                 }
             }
+
+            DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
+            String collumnName;
+            for (int i = 0; i <= numTests; i++) {
+                collumnName = "Test" + (i + 1);
+                if (i == numTests) {
+                    collumnName = "Final Grade";
+                }
+                model.addColumn(collumnName);
+            }
             Object[] scoreTracker = scoreList.toArray();
+            System.out.println(scoreTracker);
+            model = (DefaultTableModel) classroomTableDisplay.getModel();
             for (int i = 0; i < studentCount; i++) {
-                DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-                Object[] row = {studentTracker[i], scoreTracker[i]};
+                Object[] row = {studentTracker[i], scoreTracker[i], "words", "words", "words"};
                 model.addRow(row);
                 System.out.println("Did it!");
             }
@@ -1176,7 +1233,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         }
     }
 
-    public void newStudent(String student, int score, String username) throws IOException { //New Student
+    public void newStudent(String student, String score, String username) throws IOException { //New Student
         File textFile;
         String studentPath = path + "StudentHavenAccounts/Students/" + student + ".txt";
         String teacherPath = path + "StudentHavenAccounts/" + username + ".txt";
@@ -1185,6 +1242,14 @@ public class CulminatingProject extends javax.swing.JFrame {
         PrintWriter print_line;
         textFile = new File(studentPath);
 
+        String sep = ",";
+
+//        ArrayList scores = new ArrayList();
+//        Object[] scoresArray = scores.toArray();
+//        if(score.contains(",")){
+//            scoresArray = score.split(",");
+//            System.out.println(scoresArray);
+//        }
         if (textFile.exists()) {
             System.out.println("Student by that name already exists.");
         } else {
@@ -1225,15 +1290,25 @@ public class CulminatingProject extends javax.swing.JFrame {
             String realPassword = null;
             String endPass = "";
             givenPassword = "password:" + givenPassword;
+            String col = "tests";
+            String sep = ":";
+            String testNum = null;
 
             try {
                 in = new FileReader(textFile);
                 readFile = new BufferedReader(in);
                 while ((realPassword = readFile.readLine()) != null) {
-                    endPass = realPassword.substring(0, givenPassword.length());
-                    if (givenPassword.equals(endPass)) {
-                        return ("Logged in!");
+                    if (realPassword.contains("password:")) {
+                        endPass = realPassword.substring(0, givenPassword.length());
                     }
+                    if (realPassword.contains(col + sep)) {
+                        testNum = realPassword.substring(col.length() + 1);
+                        System.out.println(testNum);
+                        numTests = Integer.parseInt(testNum);
+                    }
+//                    if (givenPassword.equals(endPass)) {
+//                        return ("Logged in!");
+//                    }
                 }
                 readFile.close();
                 in.close();
@@ -1395,4 +1470,8 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JTextField usernameInput;
     private javax.swing.JLabel usernamePrompt;
     // End of variables declaration//GEN-END:variables
+
+    private void String(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
