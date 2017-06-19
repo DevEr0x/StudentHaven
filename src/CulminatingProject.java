@@ -84,12 +84,6 @@ public class CulminatingProject extends javax.swing.JFrame {
         newAccountConfirm = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         accountOutput = new javax.swing.JLabel();
-        testSetupPanel = new javax.swing.JPanel();
-        mainLabelTestSetup = new javax.swing.JLabel();
-        numTestInput = new javax.swing.JTextField();
-        numTestConfirmButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         classroomCreatePanel = new javax.swing.JPanel();
         classroomTable = new javax.swing.JScrollPane();
         classroomTableDisplay = new javax.swing.JTable();
@@ -155,7 +149,7 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         locationPromptLabel.setText("Where should the files be stored:");
 
-        pathInput.setText("D:/");
+        pathInput.setText("Y:/Documents/");
 
         pathConfirmButton.setText("Confirm");
         pathConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -406,81 +400,19 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         mainPanelTabbed.addTab("Account Details", null, accountPanel, "This is where you can login or create an account.");
 
-        testSetupPanel.setBackground(new java.awt.Color(153, 153, 153));
-        testSetupPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-
-        mainLabelTestSetup.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        mainLabelTestSetup.setForeground(new java.awt.Color(0, 0, 255));
-        mainLabelTestSetup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mainLabelTestSetup.setText("Number of Tests:");
-
-        numTestConfirmButton.setText("Confirm");
-        numTestConfirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numTestConfirmButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("This is not a step that you can skip... You need to input the number of tests that your students must have scores");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" for otherwise the program will only ask for one score.");
-
-        javax.swing.GroupLayout testSetupPanelLayout = new javax.swing.GroupLayout(testSetupPanel);
-        testSetupPanel.setLayout(testSetupPanelLayout);
-        testSetupPanelLayout.setHorizontalGroup(
-            testSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainLabelTestSetup, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(testSetupPanelLayout.createSequentialGroup()
-                .addGroup(testSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(testSetupPanelLayout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addGroup(testSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numTestConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(numTestInput, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(testSetupPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(testSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(testSetupPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
-        testSetupPanelLayout.setVerticalGroup(
-            testSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(testSetupPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainLabelTestSetup)
-                .addGap(18, 18, 18)
-                .addComponent(numTestInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(numTestConfirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(222, Short.MAX_VALUE))
-        );
-
-        mainPanelTabbed.addTab("Test Setup", testSetupPanel);
-
         classroomTableDisplay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Student Name"
+                "Student Name", "Student Grade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -496,6 +428,7 @@ public class CulminatingProject extends javax.swing.JFrame {
         classroomTable.setViewportView(classroomTableDisplay);
         if (classroomTableDisplay.getColumnModel().getColumnCount() > 0) {
             classroomTableDisplay.getColumnModel().getColumn(0).setResizable(false);
+            classroomTableDisplay.getColumnModel().getColumn(1).setResizable(false);
         }
 
         addStudentPanel.setBackground(new java.awt.Color(153, 153, 153));
@@ -792,7 +725,7 @@ public class CulminatingProject extends javax.swing.JFrame {
             activeAccount.setText("Logged out.");
             accountOutput.setText("Logged out. Please log in to continue.");
             emptyTable();
-
+            numTests = 0;
         } else {
             activeAccount.setText("You are not currently logged in.");
         }
@@ -803,7 +736,13 @@ public class CulminatingProject extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void kauneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kauneButtonActionPerformed
+        String title = mainTitle.getText();
         System.out.println("Give me extra credit- I mean... Kaune Rules!");
+        if (!title.equals("Kaune Haven")) {
+            mainTitle.setText("Kaune Haven");
+        } else {
+            mainTitle.setText("Student Haven");
+        }
     }//GEN-LAST:event_kauneButtonActionPerformed
 
     private void mainPanelTabbedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelTabbedMouseClicked
@@ -983,8 +922,9 @@ public class CulminatingProject extends javax.swing.JFrame {
             classroomOutput.setText("Please fill out both fields");
             return;
         }
+//        int scoreChecker = Integer.parseInt(score);
         if (loggedIn) {
-//            if (Integer.parseInt(score) > 100) {
+//            if (scoreChecker > 100) {
 //                classroomOutput.setText("You can't score over 100!");
 //                return;
 //            }
@@ -1073,67 +1013,6 @@ public class CulminatingProject extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pathConfirmButtonActionPerformed
 
-    private void numTestConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numTestConfirmButtonActionPerformed
-        if (loggedIn) {
-            String currentPath = path + "StudentHavenAccounts/" + username + ".txt";
-            FileWriter write = null;
-            PrintWriter print_line;
-            File textFile = new File(currentPath);
-            FileReader in;
-            BufferedReader readFile;
-            String line = null;
-            int listCounter = 0;
-            ArrayList list = new ArrayList();
-
-            String col = "tests";
-            String sep = ":";
-
-            numTests = Integer.parseInt(numTestInput.getText());
-
-            try {
-                in = new FileReader(textFile);
-                readFile = new BufferedReader(in);
-                while ((line = readFile.readLine()) != null) {
-                    listCounter++;
-                    list.add(line);
-                }
-                readFile.close();
-                in.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("No account by that name.");
-                classroomOutput.setText("No student by that name was found - Make sure you spelled it right. (Case sensitive)");
-                System.err.println("FileNotFoundException: " + e.getMessage());
-            } catch (IOException e) {
-                System.out.println("Problem reading file.");
-                classroomOutput.setText("There was a problem reading the file, please try again.");
-                System.err.println("IOException: " + e.getMessage());
-            }
-            Object[] listTracker = list.toArray();
-            for (int i = 0; i < listCounter; i++) {
-                String test = listTracker[i].toString();
-                if (test.contains(col + sep)) {
-                    System.out.println("Already set.");
-                    return;
-                }
-            }
-
-            listCounter += 1;
-            list.add("tests:" + numTests);
-
-            try {
-                write = new FileWriter(currentPath);
-            } catch (IOException ex) {
-                Logger.getLogger(CulminatingProject.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            print_line = new PrintWriter(write);
-            for (int i = 0; i < listCounter; i++) {
-                print_line.printf("%s" + "%n", listTracker[i]);
-            }
-            print_line.close();
-            addStudents();
-        }
-    }//GEN-LAST:event_numTestConfirmButtonActionPerformed
-
     public void emptyTable() {
         DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
         int rows = model.getRowCount();
@@ -1141,7 +1020,6 @@ public class CulminatingProject extends javax.swing.JFrame {
         for (int i = 0; i < rows; i++) {
             model.removeRow(0);
         }
-        model.setColumnCount(1);
     }
 
     public void addStudents() {                                                  //Add Students
@@ -1212,21 +1090,15 @@ public class CulminatingProject extends javax.swing.JFrame {
             }
 
             DefaultTableModel model = (DefaultTableModel) classroomTableDisplay.getModel();
-            String collumnName;
-            for (int i = 0; i <= numTests; i++) {
-                collumnName = "Test" + (i + 1);
-                if (i == numTests) {
-                    collumnName = "Final Grade";
-                }
-                model.addColumn(collumnName);
-            }
+
             Object[] scoreTracker = scoreList.toArray();
             System.out.println(scoreTracker);
             model = (DefaultTableModel) classroomTableDisplay.getModel();
+            System.out.println(studentCount);
             for (int i = 0; i < studentCount; i++) {
-                Object[] row = {studentTracker[i], scoreTracker[i], "words", "words", "words"};
+                Object[] row = {studentTracker[i], scoreTracker[i]};
                 model.addRow(row);
-                System.out.println("Did it!");
+//                System.out.println(studentCount);
             }
         } else {
             classroomOutput.setText("You must be logged in to edit student information!");
@@ -1244,12 +1116,6 @@ public class CulminatingProject extends javax.swing.JFrame {
 
         String sep = ",";
 
-//        ArrayList scores = new ArrayList();
-//        Object[] scoresArray = scores.toArray();
-//        if(score.contains(",")){
-//            scoresArray = score.split(",");
-//            System.out.println(scoresArray);
-//        }
         if (textFile.exists()) {
             System.out.println("Student by that name already exists.");
         } else {
@@ -1292,7 +1158,6 @@ public class CulminatingProject extends javax.swing.JFrame {
             givenPassword = "password:" + givenPassword;
             String col = "tests";
             String sep = ":";
-            String testNum = null;
 
             try {
                 in = new FileReader(textFile);
@@ -1300,11 +1165,6 @@ public class CulminatingProject extends javax.swing.JFrame {
                 while ((realPassword = readFile.readLine()) != null) {
                     if (realPassword.contains("password:")) {
                         endPass = realPassword.substring(0, givenPassword.length());
-                    }
-                    if (realPassword.contains(col + sep)) {
-                        testNum = realPassword.substring(col.length() + 1);
-                        System.out.println(testNum);
-                        numTests = Integer.parseInt(testNum);
                     }
 //                    if (givenPassword.equals(endPass)) {
 //                        return ("Logged in!");
@@ -1422,8 +1282,6 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel examplePrompt;
     private javax.swing.JMenuItem exitButton;
     private javax.swing.JPanel filePanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1436,7 +1294,6 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel loginTitle;
     private javax.swing.JMenuItem logoutButton;
-    private javax.swing.JLabel mainLabelTestSetup;
     private javax.swing.JTabbedPane mainPanelTabbed;
     private javax.swing.JLabel mainTitle;
     private javax.swing.JMenuBar menuBar;
@@ -1450,8 +1307,6 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JLabel newStudentLabel;
     private javax.swing.JTextField newUsernameInput;
     private javax.swing.JLabel newUsernamePrompt;
-    private javax.swing.JButton numTestConfirmButton;
-    private javax.swing.JTextField numTestInput;
     private javax.swing.JMenu optionsMenu;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JLabel passwordPrompt;
@@ -1463,7 +1318,6 @@ public class CulminatingProject extends javax.swing.JFrame {
     private javax.swing.JButton studentInfoSubmitButton;
     private javax.swing.JTextField studentNameInput;
     private javax.swing.JTextField studentScoreInput;
-    private javax.swing.JPanel testSetupPanel;
     private javax.swing.JLabel titlePrompt;
     private javax.swing.JSeparator titleSeperator;
     private javax.swing.JButton updateTable;
